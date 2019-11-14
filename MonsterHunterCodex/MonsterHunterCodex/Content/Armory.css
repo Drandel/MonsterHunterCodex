@@ -17,6 +17,8 @@
     border: 8px outset transparent;
     align-content: center;
     padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .gear-tile.active {
@@ -64,4 +66,9 @@
 
 .gear-search-box{
     margin: 0 auto;
+}
+
+.results-list{
+    max-height:325px;
+    overflow-y:auto;
 }
