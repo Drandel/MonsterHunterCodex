@@ -1,0 +1,81 @@
+﻿<link href="~/Content/Armory.css" rel="stylesheet" />
+<div id="ArmoryVue">    
+    <div class="page-header text-center"><h2>Armory</h2></div>
+    <div class="page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4" id="gear-selection">
+                    <span class="text-center"><h3>Gear Selection</h3></span>
+                    <div id="selection-container" >
+                        <div class="gear-tile" v-on:click="openGearSearch($event,'head')">
+                            <div class="col-sm">
+                                <div class="info-container">
+                                    <img class="gear-icon" src="~/Assets/Images/Armor/Stock/head-icon.png" height="40" width="40" />
+                                    <h3 class="gear-title">Head Armor</h3>
+                                    <h4 class="gear-name">Armor Name Here</h4>
+                                </div>
+                            </div>
+                            <transition name="slide">
+                                <div class="gear-search" v-if="visFlags.activeSearch=='head'">
+                                    <input class="form-control form-control-sm ml-3 w-75 gear-search-box" type="text" placeholder="Search" aria-label="Search">
+                                    <div style="width: 100%; text-align: center;" class="spinner-div">
+                                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                                        <div class="results-list">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" id="gear-overview">
+                    <span class="text-center"><h3>Gear Overview</h3></span>
+                    <button v-on:click="showSpinner()">Test Spinner</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el: '#ArmoryVue',
+        data: {
+            name: '',
+            visFlags: {
+                activeSearch: '',
+            }
+        },
+        methods: {
+            openGearSearch(event, type) {
+                              
+                var parent = $(event.target).closest(".gear-tile");
+                console.log(parent.hasClass('active'))
+
+                if (parent.hasClass('active')) {
+                    parent.removeClass('active')
+                    this.visFlags.activeSearch = '';
+                } else {
+                    $('.gear-tile').each(function () {
+                        $(this).removeClass('active');
+                    });
+                    parent.addClass('active');
+                    this.visFlags.activeSearch = type
+                }
+                
+                
+
+            },
+            showSpinner: function () {
+                $('.spinner-div').hasClass('active') ? $('.spinner-div').removeClass('active') : $('.spinner-div').addClass('active');
+            }
+        },
+        computed: {
+            
+        },
+        mounted() {
+
+        } ,
+    })
+</script>
