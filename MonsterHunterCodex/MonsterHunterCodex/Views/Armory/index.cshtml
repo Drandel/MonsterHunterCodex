@@ -1,67 +1,33 @@
 ﻿<link href="~/Content/Armory.css" rel="stylesheet" />
-<div id="ArmoryVue">    
+<div id="ArmoryVue" class="vue-app">
     <div class="page-header text-center"><h2>Armory</h2></div>
     <div class="page-content">
         <div class="container">
             <div class="row">
                 <div class="col-sm-4" id="gear-selection">
                     <span class="text-center"><h3>Gear Selection</h3></span>
-                    <div id="selection-container" >
-                        <div class="gear-tile"  v-bind:class="(visFlags.activeSearch == 'head') ? 'active' : ''">
-                            <div class="col-sm">
-                                <div class="info-container">
-                                    <button class="btn" v-bind:class="visFlags.activeSearch == 'head' ? 'btn-red' : 'btn-blu'" v-on:click="openGearSearch($event,'head')" style="float:right">
-                                        <i v-bind:class="visFlags.activeSearch == 'head' ? 'fa fa-times' : 'fas fa-chevron-down'"></i>
-                                    </button>
-                                    <img class="gear-icon" src="~/Assets/Images/Armor/Stock/head-icon.png" height="40" width="40" />
-                                    <h3 class="gear-title">Head Armor</h3>
-                                    <h4 class="gear-name">Armor Name Here</h4>
-                                </div>
-                            </div>
-                            <transition name="slide">
-                                <div class="gear-search" v-if="visFlags.activeSearch=='head'">
-                                    <div id="head-input-group" class="input-group">
-                                        <input class="form-control form-control-sm ml-3 w-75 gear-search-box search-box" type="text" placeholder="Search" aria-label="Search" v-on:click.prevent v-model="search.head.query">
-                                        <span class="input-group-btn" v-on:click.prevent>
-                                            <button class="btn btn-blu" v-on:click.prevent="doGearSearch('head')"><i class="fas fa-search"></i></button>
-                                        </span>
-                                    </div>
-                                    <div style="width: 100%; text-align: center;" class="spinner-div" v-bind:class="search.head.showSpinner ? 'active' : ''">
-                                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                                    </div>
-                                    <transition name="slide">
-                                        <div v-if="!search.head.showSpinner" class="results-list">
-                                            <ul class="list-group">
-                                                <li class="list-group-item" v-for="result in search.head.results">
-                                                    <div class="row">
-                                                        <div class="col-sm-5">
-                                                            <img v-bind:src="result.assets !== null ? result.assets.imageMale : '/Assets/Images/Armor/Stock/head-icon.png'" height="80" width="80" />
-                                                        </div>
-                                                        <div class="col-sm-7">
-                                                            {{ result.name }}
-                                                        </div>
-                                                    </div>
-                                                    
-
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </transition>
-                                </div>
-                            </transition>
-                        </div>
+                    <div id="selection-container">
+                        <gear-tile geartype="head"></gear-tile>
+                        <gear-tile geartype="chest"></gear-tile>
+                        <gear-tile geartype="arm"></gear-tile>
+                        <gear-tile geartype="waist"></gear-tile>
+                        <gear-tile geartype="legs"></gear-tile>
                     </div>
                 </div>
+                
                 <div class="col-md-8" id="gear-overview">
                     <span class="text-center"><h3>Gear Overview</h3></span>
-                    <button v-on:click="">Test Button</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="~/Vue/Components/gearTile.js"></script>
+
 <script>
+
+
     var vm = new Vue({
         el: '#ArmoryVue',
         data: {
@@ -97,46 +63,12 @@
             showSpinner: function () {
                 $('.spinner-div').hasClass('active') ? $('.spinner-div').removeClass('active') : $('.spinner-div').addClass('active');
             },
-            validateSearch: function () {
-                var vm = this;
-                if (vm.search[vm.visFlags.activeSearch].query == '') {
-                    $('#' + vm.visFlags.activeSearch + '-input-group').effect("shake", { direction: 'up', distance: 5, times: 2 });
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            doGearSearch: function (armorType) {
-                var vm = this;
-                var isValid = vm.validateSearch();
-                if (isValid) {
-                    vm.search[armorType].showSpinner = true;
-                    $.ajax(
-	                {
-                        type: 'GET',
-                        url: 'https://mhw-db.com/armor?q={"type":"' + armorType + '","name":{"$like":"%' + this.search.head.query + '%"}}',
-                        data: '',
-                        type: 'GET',
-                            success: function (data) {
-                                vm.search[armorType].showSpinner = false;
-                            console.log(data)
-                            vm.search[armorType].results = data;
-		                }//end success
-	                })//end ajax
-                }
-                
-            },
-            test: function (result) {
-                //
-                console.log(result.assets)
-            }
-            
         },
         computed: {
-            
+
         },
         mounted() {
             console.log(this.visFlags.activeSearch)
-        } ,
+        },
     })
 </script>

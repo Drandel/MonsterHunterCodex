@@ -4,7 +4,6 @@
 }
 
 body {
-    margin: 0 0 100px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -104,4 +103,8 @@ textarea {
 
 .btn-red:active {
     color: #fff !important;
+}
+
+.vue-app{
+    margin-bottom:25px;
 }

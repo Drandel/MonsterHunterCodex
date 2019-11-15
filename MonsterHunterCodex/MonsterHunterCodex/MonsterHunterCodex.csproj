@@ -143,8 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\Armor\Stock\arm-icon.png" />
-    <Content Include="Assets\Images\Armor\Stock\boot-icon.png" />
-    <Content Include="Assets\Images\Armor\Stock\chest-icon.jpg" />
+    <Content Include="Assets\Images\Armor\Stock\legs-icon.png" />
     <Content Include="Assets\Images\Armor\Stock\head-icon.png" />
     <Content Include="Assets\Images\Armor\Stock\waist-icon.png" />
     <Content Include="Assets\Images\Armor\White\arm-icon.png" />
@@ -203,6 +202,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Vue\Components\gearTile.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -33,14 +33,13 @@
     </div>
     <!--End Nav-->
     <!--Body Content-->
-    <div class="container body-content">
-        @RenderBody()
+    <div id="page-container">
+        <div class="container body-content">
+            @RenderBody()
+        </div>
     </div>
-
     <!--Footer-->
-    <div class="footer">
-        <span>&copy; @DateTime.Now.Year - Monster Hunter Codex</span>
-    </div>
+    <!-- Site footer -->
     <!--End Footer-->
 
 
@@ -49,4 +48,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+    
 </html>
