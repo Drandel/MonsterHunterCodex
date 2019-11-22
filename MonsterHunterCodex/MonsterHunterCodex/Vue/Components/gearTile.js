@@ -121,6 +121,7 @@ Vue.component('gear-tile', {
             vm.selectedImage = vm.search.results[index].assets.imageMale;
             vm.$parent.selectedGear[armorType] = vm.search.results[index];
             vm.$parent.updateStats();
+            vm.activeSearch = false;
         },
 
 

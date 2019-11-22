@@ -4,10 +4,13 @@
 }
 
 body {
+    background-color: #292929;
+    color: white;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
+    
     padding-left: 15px;
     padding-right: 15px;
     min-height: 100%;
@@ -41,6 +44,31 @@ textarea {
     margin-top: 20px;
     color: #cecece;
     padding: 5px;
+}
+
+.nav-bar-inverse {
+    background-color: #121212;
+}
+
+.data-container{
+    padding: 20px;
+    background-color: #1D1D1D;
+    border-radius: 15px;
+}
+
+.data-container-flex {
+    padding: 20px;
+    background-color: #1D1D1D;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.panel{
+    border: none !important;
 }
 
 .slide-enter-active {
@@ -112,9 +140,21 @@ textarea {
 .list-title {
     color:white;
     font-size:150%;
-    background-color: #222222;
+    background-color: #222222 !important;
 }
 
 .table-icon{
     float:left;
+}
+
+.list-group{
+    margin:5px;
+}
+
+.list-group-item {
+    background-color: #606060;
+}
+
+.list-group-item:hover {
+    border: 2px solid #ddd !important;
 }

@@ -2,11 +2,11 @@
 <div id="ArmoryVue" class="vue-app">
     <div class="page-header text-center"><h2>Armory</h2></div>
     <div class="page-content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12 col-mg-4 col-lg-4" id="gear-selection">
+                <div class="col-sm-12 col-md-4 col-lg-4 ">
                     <h3>Gear Selection</h3>
-                    <div id="selection-container">
+                    <div class="data-container">
                         <gear-tile geartype="head"></gear-tile>
                         <gear-tile geartype="chest"></gear-tile>
                         <gear-tile geartype="gloves"></gear-tile>
@@ -14,32 +14,29 @@
                         <gear-tile geartype="legs"></gear-tile>
                     </div>
                 </div>
-                
-                <div class="col-sm-12 col-mg-8 col-lg-8" id="gear-overview">
+                <div class="col-sm-12 col-md-8 col-lg-8" id="gear-overview">
                     <h3>Gear Overview</h3>
-                    <div class="gear-overview-data-container" v-if="!isSelectedGearEmpty">
-                        <div class="col-sm-12 col-mg-4 col-lg-4" >
-                            <div class="panel panel-default text-center">
-                                <ul class="list-group">
-                                    <li class="list-group-item list-title">Defense</li>
-                                    <li class="list-group-item">Base: {{stats.defense.base}}</li>
-                                    <li class="list-group-item">Max: {{ stats.defense.max }}</li>
-                                    <li class="list-group-item">Augmented: {{ stats.defense.augmented }}</li>
-                                </ul>
-                            </div>
-
+                    <div class="data-container-flex">
+                        <div class="col">
+                            <ul class="list-group text-center">
+                                <li class="list-group-item list-title">Defense</li>
+                                <li class="list-group-item">Base: {{stats.defense.base}}</li>
+                                <li class="list-group-item">Max: {{ stats.defense.max }}</li>
+                                <li class="list-group-item">Augmented: {{ stats.defense.augmented }}</li>
+                            </ul>
                         </div>
-                        <div class="col-sm-12 col-mg-4 col-lg-4">
-                            <div class="panel panel-default text-center">
-                                <ul class="list-group">
-                                    <li class="list-group-item list-title">Resistances</li>
-                                    <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/dragon-icon.png" /> Dragon: {{stats.resistances.dragon}}</li>
-                                    <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/fire-icon.png" /> Fire: {{stats.resistances.fire}}</li>
-                                    <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/ice-icon.png" /> Ice: {{stats.resistances.ice}}</li>
-                                    <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/thunder-icon.png" /> Thunder: {{stats.resistances.thunder}}</li>
-                                    <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/water-icon.png" /> Water: {{stats.resistances.water}}</li>
-                                </ul>
-                            </div>
+                        <div class="col">
+                            <ul class="list-group text-center">
+                                <li class="list-group-item list-title">Resistances</li>
+                                <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/dragon-icon.png" /> Dragon: {{stats.resistances.dragon}}</li>
+                                <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/fire-icon.png" /> Fire: {{stats.resistances.fire}}</li>
+                                <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/ice-icon.png" /> Ice: {{stats.resistances.ice}}</li>
+                                <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/thunder-icon.png" /> Thunder: {{stats.resistances.thunder}}</li>
+                                <li class="list-group-item"><img class="table-icon" src="~/Assets/Images/Elements/water-icon.png" /> Water: {{stats.resistances.water}}</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+
                         </div>
                     </div>
                 </div>
@@ -69,7 +66,8 @@
                     ice: 0,
                     thunder: 0,
                     water:0,
-                },                
+                },
+                skills: {},
             },
             visFlags: {
                 activeSearch: '',
@@ -110,7 +108,6 @@
                         resStats.ice = resStats.ice !== null ? (resStats.ice + gearPiece.resistances.ice) : gearPiece.resistances.ice;
                         resStats.thunder = resStats.thunder !== null ? (resStats.thunder + gearPiece.resistances.thunder) : gearPiece.resistances.thunder;
                         resStats.water = resStats.water !== null ? (resStats.water + gearPiece.resistances.water) : gearPiece.resistances.water;
-
                     }
                 }
             },
