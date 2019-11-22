@@ -108,3 +108,13 @@ textarea {
 .vue-app{
     margin-bottom:25px;
 }
+
+.list-title {
+    color:white;
+    font-size:150%;
+    background-color: #222222;
+}
+
+.table-icon{
+    float:left;
+}

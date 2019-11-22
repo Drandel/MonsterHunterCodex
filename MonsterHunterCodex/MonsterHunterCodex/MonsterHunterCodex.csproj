@@ -142,7 +142,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Images\Armor\Stock\arm-icon.png" />
+    <Content Include="Assets\Images\Armor\Stock\gloves-icon.png" />
     <Content Include="Assets\Images\Armor\Stock\legs-icon.png" />
     <Content Include="Assets\Images\Armor\Stock\head-icon.png" />
     <Content Include="Assets\Images\Armor\Stock\waist-icon.png" />

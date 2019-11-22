@@ -5,9 +5,9 @@
             <button class="btn" v-bind:class="activeSearch ? 'btn-red' : 'btn-blu'" v-on:click="openGearSearch($event)" style="float:right">
                 <i v-bind:class="activeSearch ? 'fa fa-times' : 'fas fa-chevron-down'"></i>
             </button>
-            <img class="gear-icon" v-bind:src="stockImgUrl" height="40" width="40" />
-            <h3 class="gear-title">{{ toTitleCase(geartype) }} Armor</h3>
-            <h4 class="gear-name">Armor Name Here</h4>
+            <img class="gear-icon" v-bind:src="selectedImage" height="40" width="40" />
+            <h4 class="gear-title">{{selectedGear !== null ? selectedGear.name : 'Armor Name Here' }}</h4>
+            <h5 class="gear-name">{{ toTitleCase(geartype) }} Armor</h5>
         </div>
     </div>
     <transition name="slide">
@@ -30,7 +30,7 @@
             <transition name="slide">
                 <div v-if="!showSpinner" class="results-list">
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="result in search.results">
+                        <li class="list-group-item" v-for="(result, index) in search.results">
                             <div class="row">
                                 <div class="col-sm-5">
                                     <img v-bind:src="result.assets !== null ? result.assets.imageMale : stockImgUrl" height="80" width="80" />
@@ -38,9 +38,12 @@
                                 <div class="col-sm-7">
                                     {{ result.name }}
                                 </div>
+                                <div class="col-sm-4">
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-success" v-bind:id="index" v-on:click="setGearSelection(index)"><i class="fas fa-plus"></i></button>
+                                </div>
                             </div>
-
-
                         </li>
                     </ul>
                 </div>
@@ -57,44 +60,48 @@ Vue.component('gear-tile', {
     props: ['geartype'],
     data: function () {
         return {
-            activeSearch : false,
+            activeSearch: false,
             showSpinner: false,
             stockImgUrl: '/Assets/Images/Armor/Stock/' + this.geartype + '-icon.png',
+            selectedImage: '/Assets/Images/Armor/Stock/' + this.geartype + '-icon.png',
             ids: {
                 inputGroup: this.geartype + '-input-group',
             },
             search: {
                 query: "",
-                results:[],
-            }
+                results: [],
+            },
+            selectedGear: null,
         }
     },
-    methods:{
+    methods: {
         openGearSearch: function () {
             this.activeSearch = this.activeSearch ? false : true;
         },
         toTitleCase(str) {
             return typeof str == 'string' ? str.charAt(0).toUpperCase() + str.slice(1) : 'ERROR';
-             
+
         },
         doGearSearch: function () {
             var vm = this;
             var armorType = vm.$props.geartype;
             var isValid = vm.validateSearch();
+            var url = 'https://mhw-db.com/armor?q={"type":"' + armorType + '","name":{"$like":"%' + vm.search.query + '%"}}';
+            console.log(url);
             if (isValid) {
                 vm.showSpinner = true;
                 $.ajax(
-                {
-                    type: 'GET',
-                    url: 'https://mhw-db.com/armor?q={"type":"' + armorType + '","name":{"$like":"%' + vm.search.query + '%"}}',
-                    data: '',
-                    type: 'GET',
-                    success: function (data) {
-                        vm.showSpinner = false;
-                        console.log(data)
-                        vm.search.results = data;
-                    }//end success
-                })//end ajax
+                    {
+                        type: 'GET',
+                        url: url,
+                        data: '',
+                        type: 'GET',
+                        success: function (data) {
+                            vm.showSpinner = false;
+                            console.log(data)
+                            vm.search.results = data;
+                        }//end success
+                    })//end ajax
             }
         },
         validateSearch: function () {
@@ -106,10 +113,21 @@ Vue.component('gear-tile', {
                 return true;
             }
         },
+        setGearSelection: function (index) {
+            var vm = this;
+            var armorType = vm.$props.geartype;
+            vm.$parent.selectedGear[armorType] = vm.search.results[index];
+            vm.selectedGear = vm.search.results[index];
+            vm.selectedImage = vm.search.results[index].assets.imageMale;
+            vm.$parent.selectedGear[armorType] = vm.search.results[index];
+            vm.$parent.updateStats();
+        },
+
+
     },
     computed: {
 
     }
-    
+
 
 });
