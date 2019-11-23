@@ -1,11 +1,11 @@
 ﻿var template = `
-<div class="gear-tile" v-bind:class="activeSearch ? 'active' : ''">
+<div class="gear-tile" v-bind:class="activeSearch ? 'active' : ''" @mouseover="expandButton = true" @mouseleave="expandButton = false">
     <div class="col-sm">
         <div v-bind:id="ids.infoContainer" class="info-container">
-            <button class="btn" v-bind:class="activeSearch ? 'btn-red' : 'btn-blu'" v-on:click="openGearSearch($event)" style="float:right">
+            <button class="btn" v-bind:class="activeSearch ? 'btn-red' : 'btn-blu'" v-on:click="openGearSearch($event)" v-if="expandButton" style="float:right">
                 <i v-bind:class="activeSearch ? 'fa fa-times' : 'fas fa-chevron-down'"></i>
             </button>
-            <img class="gear-icon" v-bind:src="selectedImage" height="40" width="40" />
+            <img class="gear-icon" v-bind:src="selectedImage !== null ? selectedImage : '/Assets/Images/Armor/Stock/' + geartype + '-icon.png'" height="40" width="40" />
             <h4 class="gear-title">{{selectedGear !== null ? selectedGear.name : 'Armor Name Here' }}</h4>
             <h5 class="gear-name">{{ toTitleCase(geartype) }} Armor</h5>
         </div>
@@ -14,12 +14,14 @@
         <div class="gear-search" v-if="activeSearch">
             <div class="input-group" v-bind:id="ids.inputGroup">
                 <input 
+                    v-bind:id="geartype+'Search'"
                     class="form-control form-control-sm ml-3 w-75 gear-search-box search-box" 
                     type="text" 
                     placeholder="Search Name" 
                     aria-label="Search" 
                     v-on:click.prevent 
-                    v-model="search.query">
+                    v-model="search.query"
+                    @keyup.enter="doGearSearch()">
                 <span class="input-group-btn" v-on:click.prevent>
                     <button class="btn btn-blu" v-on:click.prevent="doGearSearch()"><i class="fas fa-search"></i></button>
                 </span>
@@ -30,7 +32,7 @@
             <transition name="slide">
                 <div v-if="!showSpinner" class="results-list">
                     <ul class="list-group">
-                        <li class="list-group-item" v-for="(result, index) in search.results">
+                        <li class="list-group-item dark" v-for="(result, index) in search.results">
                             <div class="row">
                                 <div class="col-sm-5">
                                     <img v-bind:src="result.assets !== null ? result.assets.imageMale : stockImgUrl" height="80" width="80" />
@@ -63,7 +65,8 @@ Vue.component('gear-tile', {
             activeSearch: false,
             showSpinner: false,
             stockImgUrl: '/Assets/Images/Armor/Stock/' + this.geartype + '-icon.png',
-            selectedImage: '/Assets/Images/Armor/Stock/' + this.geartype + '-icon.png',
+            selectedImage: null,
+            expandButton: false,
             ids: {
                 inputGroup: this.geartype + '-input-group',
             },
@@ -76,7 +79,9 @@ Vue.component('gear-tile', {
     },
     methods: {
         openGearSearch: function () {
-            this.activeSearch = this.activeSearch ? false : true;
+            var vm = this;
+            vm.activeSearch = vm.activeSearch ? false : true;
+            setTimeout(function () { $('#' + vm.geartype + 'Search').focus()},500)
         },
         toTitleCase(str) {
             return typeof str == 'string' ? str.charAt(0).toUpperCase() + str.slice(1) : 'ERROR';
@@ -123,8 +128,12 @@ Vue.component('gear-tile', {
             vm.$parent.updateStats();
             vm.activeSearch = false;
         },
-
-
+        clearSelection: function () {
+            this.selectedGear = null;
+            this.search.query = "";
+            this.search.results = [];
+            this.selectedImage = null;
+        },
     },
     computed: {
 
