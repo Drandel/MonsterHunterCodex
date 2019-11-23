@@ -6,12 +6,28 @@
             <div class="row">
                 <div class="col-sm-12 col-md-4 col-lg-4 ">
                     <h3>Gear Selection</h3>
-                    <div class="data-container">
-                        <gear-tile geartype="head"></gear-tile>
-                        <gear-tile geartype="chest"></gear-tile>
-                        <gear-tile geartype="gloves"></gear-tile>
-                        <gear-tile geartype="waist"></gear-tile>
-                        <gear-tile geartype="legs"></gear-tile>
+                    <div class="data-container" @@mouseenter="visFlags.showEdit=true" @@mouseleave="visFlags.showEdit=false">
+                        <div v-bind:class="showEdit" class="data-container-header text-center">
+                            <button class=" btn-dark" v-bind:class="activeGearCat == 'armor'? 'active' : ''" @@click="activeGearCat = 'armor'">Armor</button>
+                            <button class=" btn-dark" v-bind:class="activeGearCat == 'weapon'? 'active' : ''" @@click="activeGearCat = 'weapon'">Weapon</button>
+                        </div>
+                        <div v-bind:class="activeGearCat == 'armor' ? '' : 'hide' ">
+                            <gear-tile ref="headComponent" geartype="head"></gear-tile>
+                            <gear-tile ref="chestComponent" geartype="chest"></gear-tile>
+                            <gear-tile ref="glovesComponent" geartype="gloves"></gear-tile>
+                            <gear-tile ref="waistComponent" geartype="waist"></gear-tile>
+                            <gear-tile ref="legsComponent" geartype="legs"></gear-tile>
+                            <div v-bind:class="showEdit" class="data-container-footer text-center">
+                                <button class="btn btn-blu">Autoill Set</button>
+                                <button class="btn btn-dark" @@click="clearSelectedGear">Clear</button>
+
+                            </div>
+                        </div>
+                        <div v-bind:class="activeGearCat == 'weapon' ? '' : 'hide' ">
+                            <h3>Weapon selection here</h3>
+                            <br />
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-8 col-lg-8" id="gear-overview">
@@ -71,6 +87,7 @@
             },
             visFlags: {
                 activeSearch: '',
+                showEdit: false,
             },
             selectedGear:
             {
@@ -79,7 +96,8 @@
                 chest: null,
                 waist: null,
                 legs: null,
-            }
+            },
+            activeGearCat : 'armor',
         },
         methods: {
             openGearSearch(event, type) {
@@ -112,9 +130,29 @@
                 }
             },
             resetStatValues: function () {
-                vm.stats.defense.base = 0;
-                vm.stats.defense.max = 0;
-                vm.stats.defense.augmented = 0;
+                vm.stats = {
+                    defense: {
+                        base: 0,
+                        max: 0,
+                        augmented: 0,
+                    },
+                    resistances: {
+                        dragon: 0,
+                        fire: 0,
+                        ice: 0,
+                        thunder: 0,
+                        water: 0,
+                    },
+                }
+            },
+            clearSelectedGear: function () {
+                this.selectedGear.head = { head: null, gloves: null, chest: null, waist: null, legs: null, };
+                this.$refs.headComponent.clearSelection();
+                this.$refs.glovesComponent.clearSelection();
+                this.$refs.chestComponent.clearSelection();
+                this.$refs.waistComponent.clearSelection();
+                this.$refs.legsComponent.clearSelection();
+                this.resetStatValues();
             }
         },
         computed: {
@@ -131,6 +169,13 @@
                 }
                 return result;
             },
+            showEdit: function () {
+                if (this.visFlags.showEdit == true) {
+                    return "_show";
+                } else {
+                    return "_hide";
+                }
+            }
         },
         mounted() {
         },
