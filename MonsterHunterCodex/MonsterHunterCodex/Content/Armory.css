@@ -22,13 +22,15 @@
 }
 
 .gear-tile.active {
-    border: 8px outset #007bff;
-    border-radius: 40px 40px 0px 0px;
+    /*border: 8px outset #007bff;
+    border-radius: 40px 40px 0px 0px;*/
+    background-color:#606060;
 }
 
 .gear-tile:hover:not(.active) {
-    border: 8px outset #007bff;
-    border-radius: 40px 40px 0px 0px;
+    /*border: 8px outset #007bff;
+    border-radius: 40px 40px 0px 0px;*/
+    background-color:#606060;
     transition: .2s ease;
 }
 
@@ -82,3 +84,10 @@
     font-weight: bold;
     z-index:1000;
 }
+
+
+
+.dark {
+    background-color: #1D1D1D;
+}
+
