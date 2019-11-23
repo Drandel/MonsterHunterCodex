@@ -24,8 +24,7 @@
                             </div>
                         </div>
                         <div v-bind:class="activeGearCat == 'weapon' ? '' : 'hide' ">
-                            <h3>Weapon selection here</h3>
-                            <br />
+                            <weapon-selector></weapon-selector>
                         </div>
                         
                     </div>
@@ -62,7 +61,7 @@
 </div>
 
 <script src="~/Vue/Components/gearTile.js"></script>
-
+<script src="~/Vue/Components/weaponSelector.js"></script>
 <script>
 
 
