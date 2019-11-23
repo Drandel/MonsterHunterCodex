@@ -51,7 +51,6 @@ textarea {
 }
 
 .data-container{
-    padding: 20px;
     background-color: #1D1D1D;
     border-radius: 15px;
 }
@@ -156,5 +155,61 @@ textarea {
 }
 
 .list-group-item:hover {
-    border: 2px solid #ddd !important;
+    border: 1px solid #ddd !important;
+    background-color: #8e8787;
+    font-weight: 100 !important;
+}
+
+.data-container-header {
+    min-width: 100%;
+    background-color: #222222;
+    color: white;
+    padding: 10px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+.btn-dark {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    background-color: #292929;
+}
+
+.btn-dark.active {
+    background-color: #0052ab;
+}
+
+.btn-dark:hover{
+    color:white;
+    text-decoration: underline;
+}
+
+.data-container-footer {
+    min-width: 100%;
+    background-color: #222222;
+    color: white;
+    padding: 10px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+._show {
+    opacity: 1;
+    transition: .75s ease;
+}
+
+._hide {
+    opacity: 0;
+    transition: .50s ease;
 }
