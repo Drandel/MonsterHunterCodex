@@ -53,6 +53,7 @@ textarea {
 .data-container{
     background-color: #1D1D1D;
     border-radius: 15px;
+    margin:5px;
 }
 
 .data-container-flex {
@@ -212,4 +213,16 @@ textarea {
 ._hide {
     opacity: 0;
     transition: .50s ease;
+}
+
+.btn-purple {
+    background-color: #870CF9;
+    color: white;
+    border: none;
+    transition: ease-out .25s;
+}
+
+btn-purple:hover {
+    background-color: white;
+    color: #870CF9;
 }

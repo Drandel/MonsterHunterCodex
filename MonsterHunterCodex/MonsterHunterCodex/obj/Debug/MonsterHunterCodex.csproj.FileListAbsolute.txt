@@ -75,7 +75,8 @@ D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\bin\System.Net.
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\bin\System.Web.Http.xml
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\bin\System.Web.Http.WebHost.xml
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.csprojAssemblyReference.cache
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.csproj.CopyComplete
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.dll
 D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.pdb
+D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.csproj.CoreCompileInputs.cache
+D:\Repo\MonsterHunterCodex\MonsterHunterCodex\MonsterHunterCodex\obj\Debug\MonsterHunterCodex.csproj.AssemblyReference.cache

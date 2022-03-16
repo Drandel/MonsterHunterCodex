@@ -11,7 +11,12 @@ namespace MonsterHunterCodex.Controllers
         // GET: Armory
         public ActionResult Index()
         {
-            return View();
+            ArmoryModel vm = new ArmoryModel()
+            {
+                Test1 = "model test",
+                Test2 = 69
+            };
+            return View(vm);
         }
     }
 }

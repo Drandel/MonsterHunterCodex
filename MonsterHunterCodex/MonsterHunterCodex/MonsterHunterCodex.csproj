@@ -138,9 +138,14 @@
     <Compile Include="Controllers\ArmoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MonstersController.cs" />
+    <Compile Include="Controllers\QuestsController.cs" />
+    <Compile Include="Controllers\RiseArmoryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArmoryModel.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\RiseArmoryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -255,10 +260,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Quests\index.cshtml" />
+    <Content Include="Views\RiseArmory\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -123,7 +123,7 @@ Vue.component('gear-tile', {
             var armorType = vm.$props.geartype;
             vm.$parent.selectedGear[armorType] = vm.search.results[index];
             vm.selectedGear = vm.search.results[index];
-            vm.selectedImage = vm.search.results[index].assets.imageMale;
+            vm.selectedImage = (vm.search.results[index].assets !== null) ? vm.search.results[index].assets.imageMale : null;
             vm.$parent.selectedGear[armorType] = vm.search.results[index];
             vm.$parent.updateStats();
             vm.activeSearch = false;
