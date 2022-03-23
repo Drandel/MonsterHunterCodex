@@ -89,27 +89,23 @@ Vue.component('gear-tile', {
         },
         doGearSearch: function () {
             var vm = this;
-            var armorType = vm.$props.geartype;
-            var isValid = vm.validateSearch();
-            var url = 'https://mhw-db.com/armor?q={"type":"' + armorType + '","name":{"$like":"%' + vm.search.query + '%"}}';
-            console.log(url);
-            if (isValid) {
+            if (vm.isValidSearch()) {
+                var url = 'https://mhw-db.com/armor?q={"type":"' + vm.$props.geartype + '","name":{"$like":"%' + vm.search.query + '%"}}';
                 vm.showSpinner = true;
                 $.ajax(
-                    {
-                        type: 'GET',
-                        url: url,
-                        data: '',
-                        type: 'GET',
-                        success: function (data) {
-                            vm.showSpinner = false;
-                            console.log(data)
-                            vm.search.results = data;
-                        }//end success
-                    })//end ajax
+                {
+                    type: 'GET',
+                    url: url,
+                    data: '',
+                    type: 'GET',
+                    success: function (data) {
+                        vm.showSpinner = false;
+                        vm.search.results = data;
+                    }
+                })
             }
         },
-        validateSearch: function () {
+        isValidSearch: function () {
             var vm = this;
             if (vm.search.query == '') {
                 $('#' + vm.geartype + '-input-group').effect("shake", { direction: 'up', distance: 5, times: 2 });
@@ -121,12 +117,13 @@ Vue.component('gear-tile', {
         setGearSelection: function (index) {
             var vm = this;
             var armorType = vm.$props.geartype;
-            vm.$parent.selectedGear[armorType] = vm.search.results[index];
-            vm.selectedGear = vm.search.results[index];
-            vm.selectedImage = (vm.search.results[index].assets !== null) ? vm.search.results[index].assets.imageMale : null;
-            vm.$parent.selectedGear[armorType] = vm.search.results[index];
-            vm.$parent.updateStats();
-            vm.activeSearch = false;
+            this.$emit("gear-selected-event", { "armorType":armorType, "armor":vm.search.results[index] })
+            //vm.$parent.selectedGear[armorType] = vm.search.results[index];
+            //vm.selectedGear = vm.search.results[index];
+            //vm.selectedImage = (vm.search.results[index].assets !== null) ? vm.search.results[index].assets.imageMale : null;
+            //vm.$parent.selectedGear[armorType] = vm.search.results[index];
+            //vm.$parent.updateStats();
+            //vm.activeSearch = false;
         },
         clearSelection: function () {
             this.selectedGear = null;
@@ -138,6 +135,4 @@ Vue.component('gear-tile', {
     computed: {
 
     }
-
-
 });

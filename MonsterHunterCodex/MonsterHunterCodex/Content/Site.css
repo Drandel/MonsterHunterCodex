@@ -57,6 +57,11 @@ textarea {
     padding: 10px;
 }
 
+.data-container-tight {
+    background-color: #1D1D1D;
+    border-radius: 15px;
+}
+
 .data-container-flex {
     padding: 20px;
     background-color: #1D1D1D;

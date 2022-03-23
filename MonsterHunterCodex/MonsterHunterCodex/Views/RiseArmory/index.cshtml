@@ -9,28 +9,61 @@
     <div class="page-header text-center"><h2>Monster Hunter Rise Armory</h2></div>
     <div class="container-fluid">
         <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="data-container">
+            <div class="data-container-tight">
                 <gear-selection></gear-selection>
             </div>
         </div>
         <div class="col-sm-12 col-md-8 col-lg-8">
             <div class="data-container">
-
+                <gear-overview
+                    :stats=stats
+                    @@gear-selected-event="gearSelected"
+                >
+                </gear-overview>
             </div>
         </div>
     </div>
 </div>
 
 <script src="~/Vue/Components/gearSelection.js"></script>
+<script src="~/Vue/Components/gearTile.js"></script>
+<script src="~/Vue/Components/gearOverview.js"></script>
 
 <script>
     var vm = new Vue({
         el: '#RiseArmoryVue',
         data: {
-            message: 'Hello'
+            stats: {
+                defense: {
+                    base: 0,
+                    max: 0,
+                    augmented: 0,
+                },
+                resistances: {
+                    dragon: 0,
+                    fire: 0,
+                    ice: 0,
+                    thunder: 0,
+                    water: 0,
+                },
+                skills: {},
+            },
+            selectedGear: {
+                head: null,
+                gloves: null,
+                chest: null,
+                waist: null,
+                legs: null,
+            },
         },
         methods: {
-
+            updateStats: function () {
+                console.log(this.selectedGear);
+            },
+            gearSelected: function (event) {
+                console.log("captured")
+                console.log(event)
+            }
         },
         computed: {
 
